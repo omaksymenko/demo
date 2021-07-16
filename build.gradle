@@ -1,0 +1,33 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+compileJava.options.fork = true
+compileJava.options.forkOptions.executable = 'C:/Program Files/Java/jdk-11.0.11/bin/javac.exe'
+compileTestJava.options.fork = true
+compileTestJava.options.forkOptions.executable = 'C:/Program Files/Java/jdk-11.0.11/bin/javac.exe'
+// to build with different JDK (e.g. u have 8 version in JAVA_HOME but want gradle to use 11) try
+// gradlew build -Dorg.gradle.java.home="C:/Program Files/Java/jdk-11.0.11/"
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	//implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+build {
+}
+
+test {
+	useJUnitPlatform()
+}
