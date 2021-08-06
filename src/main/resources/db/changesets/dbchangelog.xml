@@ -1,0 +1,64 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+<changeSet id="1" author="olena">
+    <preConditions onFail="MARK_RAN">
+        <not>
+            <tableExists tableName="customer"/>
+           <tableExists tableName="address"/>
+        </not>
+        </preConditions>
+   <comment>customer and address tables creation</comment>
+   <createTable tableName="customer">
+       <column name="id" type="int">
+           <constraints primaryKey="true"/>
+       </column>
+       <column name="first_name" type="text"/>
+       <column name="last_name" type="text"/>
+   </createTable>
+
+       <addAutoIncrement columnDataType="int"
+                         columnName="id"
+                         incrementBy="1"
+                         schemaName="public"
+                         startWith="1"
+                         tableName="customer"/>
+
+       <createTable tableName="address">
+           <column name="id" type="int">
+               <constraints primaryKey="true"/>
+           </column>
+           <column name="country" type="text"/>
+           <column name="city" type="text"/>
+           <column name="street" type="text"/>
+           <column name="house_number" type="int">
+               <constraints checkConstraint="CHECK (house_number &gt; 0)"/>
+           </column>
+           <column name="customer_id" type="int"/>
+
+       </createTable>
+
+       <addAutoIncrement columnDataType="int"
+                         columnName="id"
+                         incrementBy="1"
+                         schemaName="public"
+                         startWith="1"
+                         tableName="address"/>
+       <addForeignKeyConstraint  baseColumnNames="customer_id"
+                                 baseTableName="address"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_address_customer"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"
+                                 referencedTableSchemaName="public"
+                                 validate="true"/>
+
+   </changeSet>
+
+   </databaseChangeLog>
