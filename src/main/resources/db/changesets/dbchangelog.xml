@@ -61,4 +61,120 @@
 
    </changeSet>
 
-   </databaseChangeLog>
+    <changeSet id="2" author="olena">
+        <comment>add not null constraints</comment>
+        <addNotNullConstraint columnDataType="text"
+                              columnName="first_name"
+                              constraintName="const_first_name"
+                              schemaName="public"
+                              tableName="customer"
+                              validate="true"/>
+        <addNotNullConstraint columnDataType="text"
+                              columnName="last_name"
+                              constraintName="const_last_name"
+                              schemaName="public"
+                              tableName="customer"
+                              validate="true"/>
+        <addNotNullConstraint columnDataType="text"
+                              columnName="country"
+                              constraintName="const_country"
+                              schemaName="public"
+                              tableName="address"
+                              validate="true"/>
+        <addNotNullConstraint columnDataType="text"
+                              columnName="city"
+                              constraintName="const_city"
+                              schemaName="public"
+                              tableName="address"
+                              validate="true"/>
+        <addNotNullConstraint columnDataType="text"
+                              columnName="street"
+                              constraintName="const_street"
+                              schemaName="public"
+                              tableName="address"
+                              validate="true"/>
+        <addNotNullConstraint columnDataType="int"
+                              columnName="house_number"
+                              constraintName="const_house_number"
+                              schemaName="public"
+                              tableName="address"
+                              validate="true"/>
+    </changeSet>
+
+    <changeSet id="3" author="olena">
+        <comment>add customer middle name column</comment>
+        <addColumn schemaName= "public"
+                   tableName="customer" >
+            <column name="middle_name"
+                    position="3"
+                    type="text"/>
+        </addColumn>
+    </changeSet>
+
+    <!-- customer address add many to many relationship -->
+    <changeSet  id="4" author="olena">
+        <comment> drop customer address one to many relationship </comment>
+        <dropForeignKeyConstraint baseTableName="address"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_address_customer"/>
+            <dropColumn columnName="customer_id"
+                        schemaName="public"
+                        tableName="address">
+            </dropColumn>
+    </changeSet>
+
+    <changeSet id="5" author="olena">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customer_address"/>
+            </not>
+        </preConditions>
+        <comment>customer address add many to many relationship table</comment>
+        <createTable tableName="customer_address">
+            <column name="customer_id" type="int"/>
+            <column name="address_id" type="int"/>
+        </createTable>
+
+        <addNotNullConstraint columnDataType="int"
+                              columnName="customer_id"
+                              constraintName="const_customer_id"
+                              schemaName="public"
+                              tableName="customer_address"
+                              validate="true"/>
+        <addNotNullConstraint columnDataType="int"
+                              columnName="address_id"
+                              constraintName="const_address_id"
+                              schemaName="public"
+                              tableName="customer_address"
+                              validate="true"/>
+
+        <addPrimaryKey clustered="true"
+                       columnNames="customer_id, address_id"
+                       constraintName="pk_customer_address"
+                       schemaName="public"
+                       tableName="customer_address"
+                       validate="true"/>
+
+        <addForeignKeyConstraint  baseColumnNames="customer_id"
+                                  baseTableName="customer_address"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_customer"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="customer"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+        <addForeignKeyConstraint  baseColumnNames="address_id"
+                                  baseTableName="customer_address"
+                                  baseTableSchemaName="public"
+                                  constraintName="fk_address"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="address"
+                                  referencedTableSchemaName="public"
+                                  validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
