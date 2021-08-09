@@ -1,11 +1,13 @@
 package com.example.demo.entity;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,20 +21,21 @@ import java.util.Set;
 @Table(name = "customer")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @NotNull
-    @Column(name = "fist_name")
+    @Column(name = "first_name")
     private String firstName;
     @Column(name = "middle_name")
     private String middleName;
     @NotNull
     @Column(name = "last_name")
     private String lastName;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "customer_address",
             joinColumns = @JoinColumn(name = "customer_id"),
