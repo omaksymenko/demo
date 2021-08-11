@@ -15,8 +15,8 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public void saveCustomer(Customer customer) {
-        customerRepository.save(customer);
+    public Customer saveCustomer(Customer customer) {
+        return customerRepository.save(customer);
     }
 
     public void deleteCustomer(Customer customer) {

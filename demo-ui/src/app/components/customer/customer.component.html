@@ -1,18 +1,17 @@
-<div style="width: 400px; margin: auto;">
-        <label>id</label>
+ <label>id</label>
         <input
           type="text"
           class="form-control"
           id="id"
           required
-          [(ngModel)]="id"
+          [(ngModel)]="customer.id"
         />
         <label>first name</label>
         <input
           class="form-control"
           id="firstName"
           required
-          [(ngModel)]="firstName"
+          [(ngModel)]="customer.firstName"
         />
 
   <label>middle name</label>
@@ -20,7 +19,7 @@
     class="form-control"
     id="middleName"
     required
-    [(ngModel)]="middleName"
+    [(ngModel)]="customer.middleName"
   />
 
   <label>last name</label>
@@ -28,6 +27,6 @@
     class="form-control"
     id="lastName"
     required
-    [(ngModel)]="lastName"
+    [(ngModel)]="customer.lastName"
   />
-</div>
+ <button (click)="editCustomer()">Edit</button>

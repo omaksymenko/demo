@@ -7,7 +7,6 @@ import {Injectable} from "@angular/core";
 })
 export class CustomersService {
   constructor(private http: HttpClient) {
-    console.log('uiui')
   }
 
   getCustomers(): Observable<any> {

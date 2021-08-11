@@ -15,10 +15,14 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/customers")
-    public Set<Customer> getCustomers(){
+    public Set<Customer> getCustomers() {
         return customerService.getCustomers();
     }
 
+    @PutMapping("/customer")
+    public Customer updateCustomer(@RequestBody Customer customer) {
+        return customerService.saveCustomer(customer);
+    }
 
     @GetMapping("/customers/{id}")
     public Customer getCustomer(@PathVariable int id){

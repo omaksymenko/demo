@@ -9,11 +9,9 @@ import {CustomersService} from "../../services/CustomersService";
 export class CustomersComponent implements OnInit {
   customers: any;
   constructor(private customersService: CustomersService) {
-    console.log('constr');
   }
 
   ngOnInit(): void {
-    console.log('init');
     this.getCustomers();
   }
 
@@ -21,7 +19,6 @@ export class CustomersComponent implements OnInit {
     this.customersService.getCustomers()
       .subscribe(data => {
         this.customers = data;
-        console.log('customers', this.customers);
         },
         error => console.error('error', error));
   }
