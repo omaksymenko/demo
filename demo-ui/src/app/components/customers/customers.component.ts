@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CustomersService} from "../../services/CustomersService";
+import {CustomerService} from "../../services/CustomerService";
 
 @Component({
   selector: 'app-customers',
@@ -8,7 +8,7 @@ import {CustomersService} from "../../services/CustomersService";
 })
 export class CustomersComponent implements OnInit {
   customers: any;
-  constructor(private customersService: CustomersService) {
+  constructor(private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
@@ -16,11 +16,15 @@ export class CustomersComponent implements OnInit {
   }
 
   getCustomers() : void {
-    this.customersService.getCustomers()
+    this.customerService.getCustomers()
       .subscribe(data => {
         this.customers = data;
         },
         error => console.error('error', error));
   }
 
+  deleteCustomer(id: any): void {
+    this.customerService.deleteCustomer(id)
+      .subscribe(() => this.getCustomers());
+  }
 }

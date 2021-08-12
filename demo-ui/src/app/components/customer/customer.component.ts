@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CustomerService} from "../../services/CustomerService";
 import {ActivatedRoute} from "@angular/router";
+import * as _ from "lodash";
 
 
 @Component({
@@ -24,12 +25,14 @@ export class CustomerComponent implements OnInit {
   }
 
   getCustomerById(id: any): void {
-    this.customerService.getCustomerById(id)
-      .subscribe(data => {
-        this.customer = data;
-      }, error => {
-        console.error('error', error);
-      });
+    if(!_.isEmpty(id)) {
+      this.customerService.getCustomerById(id)
+        .subscribe(data => {
+          this.customer = data;
+        }, error => {
+          console.error('error', error);
+        });
+    }
   }
 
   editCustomer(): void {

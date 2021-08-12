@@ -24,6 +24,11 @@ public class CustomerController {
         return customerService.saveCustomer(customer);
     }
 
+    @DeleteMapping("/customer/{id}")
+    public void deleteCustomer(@PathVariable int id) {
+        customerService.deleteCustomer(id);
+    }
+
     @GetMapping("/customers/{id}")
     public Customer getCustomer(@PathVariable int id){
         return customerService.getCustomerById(id);

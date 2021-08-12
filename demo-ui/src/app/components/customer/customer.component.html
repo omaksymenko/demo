@@ -1,10 +1,12 @@
- <label>id</label>
+ <label  hidden="customer.id">id</label>
         <input
           type="text"
           class="form-control"
           id="id"
           required
           [(ngModel)]="customer.id"
+          disabled
+          hidden="customer.id"
         />
         <label>first name</label>
         <input
@@ -29,4 +31,5 @@
     required
     [(ngModel)]="customer.lastName"
   />
- <button (click)="editCustomer()">Edit</button>
+ <button (click)="editCustomer()">Save</button>
+ <a href="/customers">back</a>

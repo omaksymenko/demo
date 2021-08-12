@@ -2,8 +2,10 @@
 <ul>
   <li *ngFor="let customer of customers">
     <span>{{customer.id}}</span> {{customer.firstName}} {{customer.lastName}}
-    <button [routerLink]="'/customer/'+customer.id">Edit</button> <button>Delete</button>
+    <button [routerLink]="'/customer/'+customer.id">Edit</button>
+    <button (click)="deleteCustomer(customer.id)">Delete</button>
   </li>
 </ul>
+<button [routerLink]="'/customer'">Add new</button>
 
 

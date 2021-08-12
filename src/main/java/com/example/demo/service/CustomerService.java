@@ -19,8 +19,8 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public void deleteCustomer(Customer customer) {
-        customerRepository.delete(customer);
+    public void deleteCustomer(int id) {
+        customerRepository.findById(id).ifPresent(customerRepository::delete);
     }
 
     public Customer getCustomerById(int id) {
