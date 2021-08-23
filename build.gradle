@@ -1,49 +1,24 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.2'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'java'
-}
-
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-//compileJava.options.fork = true
-//compileJava.options.forkOptions.executable = 'C:/Program Files/Java/jdk-11.0.11/bin/javac.exe'
-//compileTestJava.options.fork = true
-//compileTestJava.options.forkOptions.executable = 'C:/Program Files/Java/jdk-11.0.11/bin/javac.exe'
-// to build with different JDK (e.g. u have 8 version in JAVA_HOME but want gradle to use 11) try
-// gradlew build -Dorg.gradle.java.home="C:/Program Files/Java/jdk-11.0.11/"
-
-repositories {
-	mavenCentral()
+    id "io.freefair.lombok" version "5.1.0"
+    id 'org.springframework.boot' version "2.5.3"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 ext {
-	springBootVersion = '2.5.3'
+    springBootVersion = '2.5.3'
 }
 
-dependencies {
-	//implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.5.3'
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: "${springBootVersion}"
-	implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
-//	runtimeOnly group: 'com.h2database', name: 'h2', version: '1.4.200'
-	implementation group: 'org.liquibase', name: 'liquibase-core', version: '4.4.2'
-	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-
-	compileOnly 'org.projectlombok:lombok:1.18.20'
-	annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testCompileOnly 'org.projectlombok:lombok:1.18.20'
-	testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
+allprojects {
+    repositories {
+        mavenCentral()
+    }
 }
 
-build {
-}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
 
-test {
-	useJUnitPlatform()
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    }
 }

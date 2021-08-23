@@ -1,0 +1,36 @@
+plugins {
+	id 'java'
+}
+
+ext {
+	openFeignVersion = '3.0.3'
+	postgresVersion = '42.1.4'
+	liquibaseVersion = '4.4.3'
+	javaxValidationVersion = '2.0.1.Final'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-jdbc:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+	implementation "org.springframework.cloud:spring-cloud-starter-openfeign:${openFeignVersion}"
+
+	implementation "org.postgresql:postgresql:${postgresVersion}"
+	implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
+	implementation "javax.validation:validation-api:${javaxValidationVersion}"
+
+	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:3.0.3'
+	implementation 'com.google.code.gson:gson:2.7'
+
+
+	testImplementation "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+}
+
+build {
+}
+
+test {
+	useJUnitPlatform()
+}
