@@ -7,12 +7,16 @@ import { CustomersComponent } from './components/customers/customers.component';
 import {HttpClientModule} from "@angular/common/http";
 import { CustomerComponent } from './components/customer/customer.component';
 import {FormsModule} from "@angular/forms";
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './child/child.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerComponent,
-    CustomersComponent
+    CustomersComponent,
+    ParentComponent,
+    ChildComponent
   ],
   imports: [
     BrowserModule,
